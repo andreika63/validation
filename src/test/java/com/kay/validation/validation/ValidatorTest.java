@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidatorTest {
 
-    private final Validator ok = Validator.of(() -> {});
+    private final Validator ok = Validator.of();
     private final Validator noError = Validator.of("some error", () -> false);
     private final Validator error1 = Validator.of("error1", () -> true);
     private final Validator error2 = Validator.of("error2", () -> true);
@@ -34,7 +34,7 @@ public class ValidatorTest {
 
     @Test
     public void ofVararg() {
-        ValidationResult result = Validator.of(ex, error1, noError, error2).validate();
+        ValidationResult result = Validator.of(ex, error1, null, noError, error2).validate();
         assertFalse(result.isValid());
         String msg = """
             [exception]
